@@ -24,15 +24,17 @@ public class PrintUtils {
 
 	public static final String OUT_FILE_PATH = "./candidates.out";
 	
-	public static void printOutput(Set<LinearType> linearDefinedTypes) {
+	public static void printOutput(Set<LinearType> linearDefinedTypes, String type) {
 		if(CommonUtils.isNotNull(linearDefinedTypes)) {
-			createOutFile();
+			PrintUtils.writeToOutFile("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+			PrintUtils.writeToOutFile("No. of Linear structured "+type+" found: ");
 			for(LinearType foundType: linearDefinedTypes) {
 				if(null !=foundType.getClassInstance() && isNonLibraryClass(foundType.getClassInstance()) 
 						&& CommonUtils.isNotNull(PotentialCandidateAnalysis.getInstanceFields(foundType.getClassInstance()))) {
 					writeToOutFile(foundType.getClassInstance());
 				}
 			}
+			PrintUtils.writeToOutFile("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 		}
 	}
 	

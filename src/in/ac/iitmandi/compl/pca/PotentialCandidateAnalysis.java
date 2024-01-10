@@ -27,7 +27,9 @@ public class PotentialCandidateAnalysis extends SceneTransformer{
 		LinearType.initializeJavaPrimitives();
 		Chain<SootClass> classes = Scene.v().getClasses();
 		analyzeClasses(new HashSet<SootClass>(classes));
-		PrintUtils.printOutput(linearDefinedTypes);
+		PrintUtils.createOutFile();
+		PrintUtils.printOutput(linearDefinedTypes,"types");
+		FieldAnalysis.analyzeClasses(linearDefinedTypes);
 	}
 
 	private void analyzeClasses(HashSet<SootClass> hashSet) {
