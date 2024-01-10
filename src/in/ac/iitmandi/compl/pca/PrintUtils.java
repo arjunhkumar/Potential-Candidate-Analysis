@@ -26,14 +26,17 @@ public class PrintUtils {
 	
 	public static void printOutput(Set<LinearType> linearDefinedTypes, String type) {
 		if(CommonUtils.isNotNull(linearDefinedTypes)) {
+			int size = 0;
 			PrintUtils.writeToOutFile("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 			PrintUtils.writeToOutFile("No. of Linear structured "+type+" found: ");
 			for(LinearType foundType: linearDefinedTypes) {
 				if(null !=foundType.getClassInstance() && isNonLibraryClass(foundType.getClassInstance()) 
 						&& CommonUtils.isNotNull(PotentialCandidateAnalysis.getInstanceFields(foundType.getClassInstance()))) {
 					writeToOutFile(foundType.getClassInstance());
+					size++;
 				}
 			}
+			PrintUtils.writeToOutFile("No. of Linear structured "+type+" size: "+size);
 			PrintUtils.writeToOutFile("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 		}
 	}
@@ -66,17 +69,6 @@ public class PrintUtils {
 			System.out.println("File: "+OUT_FILE_PATH+" could not be created.");
         }
 	}
-	
-//	public static void writeToOutFile(SootField field) {
-//		File file = new File(OUT_FILE_PATH);
-//		try(BufferedWriter output = new BufferedWriter(new FileWriter(file,true))){
-//			try(PrintWriter writer = new PrintWriter(output, true)){
-//				writer.write(field.getName()+"\t"+field.getType().toQuotedString()+"\t"+field.getSignature()+"\n");
-//			}
-//		} catch (IOException e) {
-//			System.out.println("File: "+OUT_FILE_PATH+" could not be opened.");
-//		}
-//	}
 	
 	public static void writeToOutFile(SootClass classMetadata) {
 		File file = new File(OUT_FILE_PATH);
